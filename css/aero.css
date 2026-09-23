@@ -3,12 +3,14 @@
 }
 
 body {
-    background-color: rgb(144, 224, 198);
     margin: 0;
     min-height: 100vh;
     display: grid;
     grid-template-columns: 220px 1fr;
-    grid-template-rows: 100px 40px 1fr auto;
+    grid-template-rows: 130px 1fr auto;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: "Segoe UI", Tahoma, sans-serif;
 }
 
 #Header {
@@ -17,17 +19,30 @@ body {
     min-height: 130px;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
     gap: 15px;
+    padding: 10px 20px;
+    background: var(--color-header);
+    border-bottom: 3px solid var(--color-agua-oscura);
+    box-shadow:
+        0 4px 12px var(--color-sombra),
+        inset 0 2px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -8px 18px rgba(0, 110, 170, 0.18);
 }
 
 #Header img {
-    height: 110px;
     width: auto;
+    height: 110px;
+    filter:
+        drop-shadow(0 3px 3px rgba(0, 70, 110, 0.35));
 }
 
 #Header h1 {
     margin: 0;
+    color: var(--color-blanco);
+    font-size: 2rem;
+    text-shadow:
+        0 2px 3px rgba(0, 70, 110, 0.45),
+        0 0 8px rgba(255, 255, 255, 0.35);
     white-space: nowrap;
 }
 
@@ -38,35 +53,128 @@ body {
 .barraSuperior nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
 }
 
-.barraSuperior {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    height: 40px;
+.barraSuperior a,
+.barraSuperior button {
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    background: var(--color-acento);
+    color: var(--color-blanco);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow:
+        0 3px 7px rgba(0, 80, 120, 0.25),
+        inset 0 2px 3px rgba(255, 255, 255, 0.65),
+        inset 0 -3px 5px rgba(0, 90, 130, 0.18);
+    text-shadow: 0 1px 2px rgba(0, 70, 110, 0.4);
+}
+
+.barraSuperior a:hover,
+.barraSuperior button:hover {
+    background: var(--color-acento-hover);
+    box-shadow:
+        0 4px 10px rgba(0, 80, 120, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .barraLateral {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 2;
     width: 220px;
+    padding: 20px 15px;
+    background: var(--color-sidebar);
+    border-right: 3px solid var(--color-agua-oscura);
+    box-shadow:
+        4px 0 12px var(--color-sombra),
+        inset -3px 0 5px rgba(255, 255, 255, 0.18);
+}
+
+.barraLateral h2 {
+    margin: 0 0 20px;
+    color: var(--color-blanco);
+    text-shadow: 0 2px 3px rgba(0, 60, 100, 0.45);
 }
 
 .barraLateral nav {
     display: flex;
     flex-direction: column;
+    gap: 8px;
+}
+
+.barraLateral a,
+.barraLateral button {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
+    background: var(--color-agua);
+    color: var(--color-blanco);
+    font: inherit;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.5),
+        inset 0 -4px 7px rgba(0, 70, 120, 0.2),
+        0 2px 5px rgba(0, 70, 110, 0.2);
+}
+
+.barraLateral a:hover,
+.barraLateral button:hover {
+    background: var(--color-acento);
+    transform: translateX(2px);
 }
 
 main {
     grid-column: 2;
-    grid-row: 3;
+    grid-row: 2;
     min-width: 0;
-    padding: 20px;
+    padding: 30px;
+    background:
+        radial-gradient(
+            circle at 75% 0%,
+            rgba(255, 255, 255, 0.8),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(0, 190, 170, 0.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            var(--color-main-inicio),
+            var(--color-main-final)
+        );
 }
 
 .pantallaUno {
     margin-bottom: 30px;
+    padding: 30px;
+    border: 2px solid var(--color-borde);
+    border-radius: 18px;
+    background: var(--color-panel);
+    box-shadow:
+        0 8px 20px var(--color-sombra),
+        inset 0 2px 5px rgba(255, 255, 255, 0.9),
+        inset 0 -8px 15px rgba(60, 180, 220, 0.12);
+}
+
+.pantallaUno h2,
+.pantallaDos h2 {
+    color: var(--color-agua-oscura);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.pantallaUno h2,
+.pantallaDos h2 {
+    color: var(--color-titulo);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
 .pantallaDos {
@@ -79,32 +187,55 @@ main {
 
 footer {
     grid-column: 1 / -1;
-    grid-row: 4;
+    grid-row: 3;
     display: grid;
     grid-template-columns: 1.5fr repeat(4, 1fr);
     gap: 30px;
     padding: 30px;
+    background: var(--color-footer);
+    color: var(--color-texto-claro);
+    border-top: 3px solid var(--color-agua-oscura);
+    box-shadow:
+        0 -5px 15px var(--color-sombra),
+        inset 0 3px 8px rgba(255, 255, 255, 0.25);
 }
 
 footer section {
     display: flex;
     flex-direction: column;
+    gap: 7px;
+}
+
+footer h3 {
+    margin-top: 0;
+    color: var(--color-blanco);
+    text-shadow: 0 2px 3px rgba(0, 50, 90, 0.4);
+}
+
+footer a {
+    color: var(--color-blanco-suave);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--color-blanco);
+    text-decoration: underline;
 }
 
 footer img {
-    max-width: 180px;
+    width: 180px;
     height: auto;
+    filter: drop-shadow(0 3px 4px rgba(0, 50, 90, 0.35));
 }
 
-.barraSuperior {
+.personalizarContenedor {
     position: relative;
-    margin-left: auto;
 }
 
 .ventanaPersonalizar {
     display: none;
     position: absolute;
-    top: 45px;
+    top: calc(100% + 14px);
     right: 0;
     z-index: 1000;
 }
@@ -116,36 +247,88 @@ footer img {
 .contenidoPersonalizar {
     position: relative;
     width: 360px;
-    min-height: 220px;
-    padding: 25px;
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.95);
-    border-radius: 14px;
+    padding: 28px;
+    border: 2px solid var(--color-borde);
+    border-radius: 16px;
+    background: var(--color-panel);
+    color: var(--color-texto);
     box-shadow:
-        0 12px 30px rgba(0, 60, 100, 0.25),
-        inset 0 1px 2px rgba(255, 255, 255, 1);
+        0 14px 30px var(--color-sombra),
+        inset 0 2px 5px rgba(255, 255, 255, 0.9),
+        inset 0 -8px 18px rgba(0, 130, 180, 0.12);
 }
 
 .contenidoPersonalizar::before {
     content: "";
     position: absolute;
     top: -10px;
-    right: 35px;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.92);
-    border-left: 1px solid rgba(255, 255, 255, 0.95);
-    border-top: 1px solid rgba(255, 255, 255, 0.95);
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    border-left: 2px solid var(--color-borde);
+    border-top: 2px solid var(--color-borde);
+    background: var(--color-panel);
     transform: rotate(45deg);
+}
+
+.contenidoPersonalizar h2 {
+    margin: 0 35px 8px 0;
+    color: var(--color-agua-oscura);
+}
+
+.contenidoPersonalizar p {
+    margin: 0 0 22px;
+    color: var(--color-texto-suave);
 }
 
 #cerrarPersonalizar {
     position: absolute;
-    top: 8px;
+    top: 10px;
     right: 10px;
-    border: none;
-    background: transparent;
-    font-size: 24px;
-    line-height: 1;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    background: var(--color-blanco-suave);
+    color: var(--color-texto);
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
     cursor: pointer;
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.9),
+        0 2px 4px var(--color-sombra);
+}
+
+#cerrarPersonalizar:hover {
+    background: var(--color-acento);
+    color: var(--color-blanco);
+}
+
+.opcionesTema {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.opcionesTema button {
+    min-height: 70px;
+    padding: 12px;
+    border: 2px solid var(--color-borde);
+    border-radius: 12px;
+    background: var(--color-blanco-suave);
+    color: var(--color-texto);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.9),
+        0 3px 7px var(--color-sombra);
+}
+
+.opcionesTema button:hover {
+    background: var(--color-acento);
+    color: var(--color-blanco);
+    transform: translateY(-2px);
 }

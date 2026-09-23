@@ -4,28 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElfenText</title>
+    <link rel="stylesheet" href="css/themes.css">
     <link rel="stylesheet" href="css/aero.css">
 </head>
 <body>
     <header id="Header">
         <img src="logos/logoTransparenteBlanco.png" alt="ElfenText">
+
         <h1>ElfenText</h1>
+
         <aside class="barraSuperior">
-                <nav>
+            <nav>
                 <a href="#">Reportar un error</a>
-                <button id="botonPersonalizar" type="button">Personalizar</button>
+
+                <div class="personalizarContenedor">
+                    <button id="botonPersonalizar" type="button">Personalizar</button>
+
+                    <div id="ventanaPersonalizar" class="ventanaPersonalizar">
+                        <div class="contenidoPersonalizar">
+
+                            <button id="cerrarPersonalizar" type="button">×</button>
+
+                            <h2>Personalizar ElfenText</h2>
+
+                            <p>Elige el aspecto de la interfaz.</p>
+
+                            <div class="opcionesTema">
+                                <button id="temaClaro" type="button">
+                                    ☀ Claro
+                                </button>
+
+                                <button id="temaOscuro" type="button">
+                                    ⏾ Oscuro
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <a href="#">Donativos</a>
                 <a href="#">Ayuda</a>
             </nav>
-
-            <div id="ventanaPersonalizar" class="ventanaPersonalizar">
-                <div class="contenidoPersonalizar">
-                    <button id="cerrarPersonalizar" type="button">×</button>
-
-                    <h2>Personalizar ElfenText</h2>
-                    <p>Aquí podrás personalizar la apariencia de ElfenText.</p>
-                </div>
-            </div>
         </aside>
     </header>
 
