@@ -8,17 +8,28 @@
 </head>
 <body>
     <header id="Header">
+        <img src="logos/logoTransparenteBlanco.png" alt="ElfenText">
         <h1>ElfenText</h1>
+        <aside class="barraSuperior">
+                <nav>
+                <a href="#">Reportar un error</a>
+                <button id="botonPersonalizar" type="button">Personalizar</button>
+                <a href="#">Donativos</a>
+                <a href="#">Ayuda</a>
+            </nav>
+
+            <div id="ventanaPersonalizar" class="ventanaPersonalizar">
+                <div class="contenidoPersonalizar">
+                    <button id="cerrarPersonalizar" type="button">×</button>
+
+                    <h2>Personalizar ElfenText</h2>
+                    <p>Aquí podrás personalizar la apariencia de ElfenText.</p>
+                </div>
+            </div>
+        </aside>
     </header>
-    <aside>
-        <nav>
-            <a href="#">Reportar un error</a>
-            <button type="button">Personalizar</button>
-            <a href="#">Donativos</a>
-           <a href="#">Ayuda</a>
-        </nav>
-    </aside>
-    <aside>
+
+    <aside class="barraLateral">
         <h2>ElfenText</h2>
         <nav>
             <button type="button">Abrir</button>
@@ -56,8 +67,16 @@
         </section>
     </main>
 
+    <div id="ventanaPersonalizar" class="ventanaPersonalizar">
+        <div class="contenidoPersonalizar">
+            <button id="cerrarPersonalizar" type="button">×</button>
+            <h2>Personalizar ElfenText</h2>
+            <p>Aquí podrás personalizar la apariencia de ElfenText.</p>
+        </div>
+    </div>
+
     <footer>
-        <img src="logos/logoTransparenteBlanco.png" alt="ElfenText">
+        <img src="logos/logoTransparenteNegro.png" alt="ElfenText">
         <section>
             <h3>Sobre</h3>
             <a href="#">Sobre nosotros</a>
@@ -82,5 +101,6 @@
             <a href="#">Documentación</a>
         </section>
     </footer>
+    <script src="visualScripts/aero.js"></script>
 </body>
 </html>
