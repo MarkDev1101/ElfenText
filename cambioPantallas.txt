@@ -1,0 +1,85 @@
+como haremos para seleccionar una carpeta y dejarla como "cargada" leyendo los archivos, y que aparezcan como las lineas para esto:
+
+<div>
+    <h4>Título</h4>
+    <h4>Pequeña descripción</h4>
+    <h4>Fecha de creación</h4>
+    <h4>Última modificación</h4>
+</div>
+
+y mas aun, que las pantallas cambien una vez hecho esto?
+
+Diseñamos un flujo para esto:
+El navegador puede hacer esto con JavaScript + File System Access API
+
+Elegir carpeta
+      ↓
+Usuario selecciona carpeta
+      ↓
+JavaScript obtiene acceso a ella
+      ↓
+Lee sus archivos
+      ↓
+Busca proyectos de ElfenText
+      ↓
+Guarda la referencia de la carpeta
+      ↓
+Actualiza "Tus proyectos"
+      ↓
+Cambia de pantalla
+
+Usaremos la API: window.showDirectoryPicker()
+Eso nos da un FileSystemDirectorHandle, eso nos deja recorrer la carpeta.
+
+Necesitamos definir el formato
+Pongamos como ejemplo:
+
+Mi carpeta/
+│
+├── Proyecto1/
+│   ├── proyecto.json
+│   └── main.tex
+│
+├── Proyecto2/
+│   ├── proyecto.json
+│   └── main.tex
+│
+└── Proyecto3/
+    ├── proyecto.json
+    └── main.tex
+
+Un proyectoEjemplo.json podria contener:
+
+{
+    "titulo": "Mi tesis",
+    "descripcion": "Documento de prueba"
+}
+
+y se veria como:
+
+Título             Descripción             Creación       Modificación
+──────────────────────────────────────────────────────────────────────
+Mi tesis           Documento de prueba     23/09/2026     23/09/2026
+
+entonces...
+
+Estas lineas no seria etiquetas <h4>, ya que justo ahora solo es un placeholder.
+Y realmente tendremos esto:
+
+<div id="listaProyectos"></div>
+
+Y JavaScript va a generar cada uno de los proyectos, y asi de "facil" lo solucionamos supongo...
+Tenemos dos pantallas en el main:
+
+<section class="pantallaUno">
+Y
+<section class="pantallaDos">
+
+Inicialmente:
+pantallaUno → visible
+pantallaDos → oculta
+
+Cuando se selecciona correctamente la carpeta:
+pantallaUno → oculta
+pantallaDos → visible
+

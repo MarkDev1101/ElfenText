@@ -28,6 +28,11 @@
 
     --color-main-inicio: #BFEFFF;
     --color-main-final: #9FE3C9;
+
+    --color-ventana-fondo: #FFFFFF;
+    --color-ventana-texto: #16445C;
+    --color-ventana-texto-suave: #47758C;
+    --color-ventana-titulo: #00749E;
 }
 
 .tema-oscuro {
@@ -60,4 +65,9 @@
 
     --color-main-inicio: #123B3B;
     --color-main-final: #0A292F;
+
+    --color-ventana-fondo: #123F52;
+    --color-ventana-texto: #E8FAFF;
+    --color-ventana-texto-suave: #B8DDE8;
+    --color-ventana-titulo: #8DE7E0;
 }

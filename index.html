@@ -11,7 +11,7 @@
     <header id="Header">
         <img src="logos/logoTransparenteBlanco.png" alt="ElfenText">
 
-        <h1>ElfenText</h1>
+        <h1>ElfenText 你好，欢迎！</h1>
 
         <aside class="barraSuperior">
             <nav>
@@ -68,21 +68,28 @@
                 Como ElfenText es un sitio local y estático,
                 no necesitas crear una cuenta.
             </p>
-            <button type="button">Elegir carpeta</button>
+            <button class="botonAero" id="elegirCarpeta" type="button">
+                Elegir carpeta
+            </button>
+            <input id="selectorCarpeta" type="file" webkitdirectory hidden>
         </section>
         <section class="pantallaDos">
             <h2>Tus proyectos</h2>
-            <div>
-                <button type="button">
+            <div id="mensajeSinProyectos">
+                <button class="botonAero" type="button">
                     Aún no tienes ningún proyecto.
                     Crea uno dando clic aquí :D
                 </button>
             </div>
-            <div>
-                <h4>Título</h4>
-                <h4>Pequeña descripción</h4>
-                <h4>Fecha de creación</h4>
-                <h4>Última modificación</h4>
+
+            <div class="tablaProyectos">
+                <div class="encabezadoProyecto">
+                    <span>Título</span>
+                    <span>Descripción</span>
+                    <span>Creación</span>
+                    <span>Modificación</span>
+                </div>
+                <div id="listaProyectos"></div>
             </div>
         </section>
     </main>
@@ -122,5 +129,6 @@
         </section>
     </footer>
     <script src="visualScripts/aero.js"></script>
+    <script src="visualScripts/cambioPantallas.js"></script>
 </body>
 </html>
