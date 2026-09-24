@@ -24,12 +24,23 @@ selectorCarpeta.addEventListener("change", () => {
         const fila = document.createElement("div");
         fila.classList.add("filaProyecto");
 
-        fila.innerHTML = `
-            <span>${archivo.name}</span>
-            <span>${archivo.webkitRelativePath}</span>
-            <span>-</span>
-            <span>-</span>
-        `;
+        const titulo = document.createElement("span");
+        titulo.textContent = archivo.name;
+
+        const descripcion = document.createElement("span");
+        descripcion.textContent = archivo.webkitRelativePath;
+
+        const creacion = document.createElement("span");
+        creacion.textContent = "—";
+
+        const modificacion = document.createElement("span");
+        modificacion.textContent =
+            new Date(archivo.lastModified).toLocaleDateString("es-MX");
+
+        fila.appendChild(titulo);
+        fila.appendChild(descripcion);
+        fila.appendChild(creacion);
+        fila.appendChild(modificacion);
 
         listaProyectos.appendChild(fila);
     }

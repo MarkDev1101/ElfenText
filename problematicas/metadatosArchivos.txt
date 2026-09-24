@@ -1,0 +1,16 @@
+Un problema que actualmente nos acecha en el proyecto...
+
+¿Cómo mostrar los datos de fecha y hora de creación y fecha y hora de la ultima modificación.
+Para mantener datos de los usuarios de forma local sin que...
+nosotros...
+tengamos los datos de ellos, y aca se basa nuestra filosofia...
+
+no somos invasivos y no queremos tus datos.
+
+Usaremos IndexedDB, basicamente es una base de datos NoSQL, integrado al navegador web, que permite almacenar datos de forma masiva 
+Es mejor que solo usar localStorage o coockies :D
+Estructura por claves
+operaciones asincronas
+y modo sin conexión!
+
+Si nos equivocamos en algo, nos gustarian tus comentarios.

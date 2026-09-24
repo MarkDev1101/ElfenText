@@ -387,3 +387,11 @@ footer img {
 .filaProyecto:hover {
     background: rgba(0, 188, 235, .18);
 }
+
+.tema-oscuro .filaProyecto {
+    background: rgba(10, 70, 85, .55);
+}
+
+.tema-oscuro .filaProyecto:hover {
+    background: rgba(0, 170, 190, .22);
+}
