@@ -62,33 +62,34 @@
 
     <main>
         <section class="pantallaUno">
-            <h2>Elige tu carpeta de lectura y destino</h2>
+            <h2>Elige tu carpeta de proyectos</h2>
             <p>
-                Esto nos permitirá detectar tus proyectos.
-                Como ElfenText es un sitio local y estático,
-                no necesitas crear una cuenta.
+                Selecciona la carpeta donde guardarás tus proyectos de ElfenText.
             </p>
-            <button class="botonAero" id="elegirCarpeta" type="button">
+            <button id="elegirCarpeta" class="botonAero" type="button">
                 Elegir carpeta
             </button>
-            <input id="selectorCarpeta" type="file" webkitdirectory hidden>
         </section>
         <section class="pantallaDos">
-            <h2>Tus proyectos</h2>
-            <div id="mensajeSinProyectos">
-                <button class="botonAero" type="button">
-                    Aún no tienes ningún proyecto.
-                    Crea uno dando clic aquí :D
+            <div class="encabezadoProyectos">
+                <div>
+                    <h2>Tus proyectos</h2>
+                    <p>Proyectos encontrados en tu carpeta.</p>
+                </div>
+
+                <button id="crearProyecto" class="botonAero" type="button">
+                    Crear proyecto
                 </button>
             </div>
 
-            <div class="tablaProyectos">
-                <div class="encabezadoProyecto">
+            <div class="contenedorProyectos">
+                <div class="encabezadoLista">
                     <span>Título</span>
                     <span>Descripción</span>
                     <span>Creación</span>
                     <span>Modificación</span>
                 </div>
+
                 <div id="listaProyectos"></div>
             </div>
         </section>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElfenText - Editor</title>
+</head>
+<body>
+
+    <header id="HeaderEditor">
+        <div class="informacionProyecto">
+            <img src="../logos/logoTransparenteBlanco.png" alt="ElfenText">
+            <h1>ElfenText</h1>
+            <span id="nombreProyecto">Proyecto</span>
+        </div>
+
+        <nav class="barraEditor">
+            <button type="button">Guardar</button>
+            <button type="button">Cerrar proyecto</button>
+        </nav>
+    </header>
+
+    <main id="Editor">
+
+        <aside class="explorador">
+            <h2>Archivos</h2>
+
+            <nav class="accionesArchivos">
+                <button type="button">Nuevo archivo</button>
+                <button type="button">Nueva carpeta</button>
+            </nav>
+
+            <section id="listaArchivos">
+                <div class="carpeta">
+                    <span>📁 Proyecto</span>
+                </div>
+
+                <div class="archivo">
+                    <span>📄 main.tex</span>
+                </div>
+
+                <div class="archivo">
+                    <span>📄 referencias.bib</span>
+                </div>
+
+                <div class="carpeta">
+                    <span>📁 imágenes</span>
+                </div>
+            </section>
+        </aside>
+
+        <section class="areaEditor">
+            <header class="barraArchivo">
+                <span id="nombreArchivo">main.tex</span>
+            </header>
+
+            <textarea id="editorTexto" spellcheck="false">
+\documentclass{article}
+
+\begin{document}
+
+Hola, mundo.
+
+\end{document}
+            </textarea>
+        </section>
+
+    </main>
+
+</body>
+</html>

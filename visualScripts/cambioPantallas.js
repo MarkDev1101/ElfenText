@@ -1,56 +1,49 @@
 const botonCarpeta = document.getElementById("elegirCarpeta");
-const selectorCarpeta = document.getElementById("selectorCarpeta");
-
 const pantallaUno = document.querySelector(".pantallaUno");
 const pantallaDos = document.querySelector(".pantallaDos");
-
 const listaProyectos = document.getElementById("listaProyectos");
-const mensajeSinProyectos = document.getElementById("mensajeSinProyectos");
 
-botonCarpeta.addEventListener("click", () => {
-    selectorCarpeta.click();
-});
+botonCarpeta.addEventListener("click", async () => {
+    try {
+        if (!window.showDirectoryPicker) {
+            console.error("Tu navegador no permite seleccionar carpetas.");
+            return;
+        }
 
-selectorCarpeta.addEventListener("change", () => {
-    const archivos = selectorCarpeta.files;
+        const carpeta = await window.showDirectoryPicker();
 
-    listaProyectos.innerHTML = "";
+        listaProyectos.innerHTML = "";
 
-    console.log("Archivos encontrados:");
+        for await (const [nombre, entrada] of carpeta.entries()) {
+            if (entrada.kind !== "directory") {
+                continue;
+            }
 
-    for (const archivo of archivos) {
-        console.log(archivo.webkitRelativePath);
+            const proyecto = document.createElement("div");
 
-        const fila = document.createElement("div");
-        fila.classList.add("filaProyecto");
+            proyecto.className = "filaProyecto";
 
-        const titulo = document.createElement("span");
-        titulo.textContent = archivo.name;
+            proyecto.innerHTML = `
+                <span>📁 ${nombre}</span>
+                <span>Sin descripción</span>
+                <span>—</span>
+                <span>—</span>
+            `;
 
-        const descripcion = document.createElement("span");
-        descripcion.textContent = archivo.webkitRelativePath;
+            proyecto.addEventListener("click", () => {
+                sessionStorage.setItem("proyectoActual", nombre);
+                window.location.href = "IDE/editor.html";
+            });
 
-        const creacion = document.createElement("span");
-        creacion.textContent = "—";
+            listaProyectos.appendChild(proyecto);
+        }
 
-        const modificacion = document.createElement("span");
-        modificacion.textContent =
-            new Date(archivo.lastModified).toLocaleDateString("es-MX");
+        pantallaUno.classList.add("oculta");
+        pantallaDos.classList.add("visible");
 
-        fila.appendChild(titulo);
-        fila.appendChild(descripcion);
-        fila.appendChild(creacion);
-        fila.appendChild(modificacion);
+        console.log("Carpeta seleccionada:", carpeta.name);
 
-        listaProyectos.appendChild(fila);
+    } catch (error) {
+        console.error("Error al seleccionar la carpeta:", error);
     }
-
-    if (archivos.length === 0) {
-        mensajeSinProyectos.style.display = "block";
-    } else {
-        mensajeSinProyectos.style.display = "none";
-    }
-
-    pantallaUno.classList.add("oculta");
-    pantallaDos.classList.add("visible");
 });

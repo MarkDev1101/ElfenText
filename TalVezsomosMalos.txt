@@ -1,0 +1,28 @@
+Este es un road map que le pedimos a GPT:
+
+✅ Interfaz base
+✅ Temas claro/oscuro
+✅ Ventana Personalizar
+✅ Selección de carpeta
+✅ Lectura de archivos
+✅ Tabla Frutiger Aero
+
+👉 1. Detectar carpetas como proyectos
+   2. Mostrar proyectos en la tabla
+   3. Abrir proyecto
+   4. Editor LaTeX básico
+   5. Guardar cambios
+   6. Crear proyectos
+   7. IndexedDB
+
+Si... no somos expertos y necesitamos algo de apoyo...
+no somos malos por usar herramientas como estas.
+
+
+en brave para usar esto, debemos entrar a:
+
+brave://flags
+
+y activar el File System
+
+Activar y reiniciar el navegador, no olvides de dejar las cosas a como son!
