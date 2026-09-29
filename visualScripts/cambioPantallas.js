@@ -3,31 +3,6 @@ const pantallaUno = document.querySelector(".pantallaUno");
 const pantallaDos = document.querySelector(".pantallaDos");
 const listaProyectos = document.getElementById("listaProyectos");
 
-function abrirBaseDatos() {
-    return new Promise((resolve, reject) => {
-        const request = indexedDB.open("ElfenTextDB", 1);
-
-        request.onupgradeneeded = () => {
-            request.result.createObjectStore("proyectos");
-        };
-
-        request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error);
-    });
-}
-
-async function guardarProyecto(nombre, handle) {
-    const db = await abrirBaseDatos();
-
-    return new Promise((resolve, reject) => {
-        const transaction = db.transaction("proyectos", "readwrite");
-        transaction.objectStore("proyectos").put(handle, nombre);
-
-        transaction.oncomplete = resolve;
-        transaction.onerror = () => reject(transaction.error);
-    });
-}
-
 async function mostrarProyectos(carpeta) {
     listaProyectos.innerHTML = "";
 
@@ -40,11 +15,17 @@ async function mostrarProyectos(carpeta) {
 
         hayProyectos = true;
 
+        await Estado.guardarProyectoHandle(
+            nombre,
+            entrada
+        );
+
         const proyecto = document.createElement("div");
+
         proyecto.className = "filaProyecto";
 
         proyecto.innerHTML = `
-            <span>📁 ${nombre}</span>
+            <span>${nombre}</span>
             <span>Sin descripción</span>
             <span>—</span>
             <span>—</span>
@@ -52,12 +33,16 @@ async function mostrarProyectos(carpeta) {
 
         proyecto.addEventListener("click", async () => {
             try {
-                await guardarProyecto(nombre, entrada);
-                sessionStorage.setItem("proyectoActual", nombre);
+                await Estado.guardarProyecto(nombre);
 
-                window.location.href = "IDE/editor.html";
+                window.location.href =
+                    "IDE/editor.html";
+
             } catch (error) {
-                console.error("No se pudo abrir el proyecto:", error);
+                console.error(
+                    "No se pudo abrir el proyecto:",
+                    error
+                );
             }
         });
 
@@ -73,7 +58,7 @@ async function mostrarProyectos(carpeta) {
     }
 }
 
-botonCarpeta.addEventListener("click", async () => {
+async function seleccionarCarpeta() {
     try {
         if (!window.showDirectoryPicker) {
             console.error(
@@ -82,11 +67,17 @@ botonCarpeta.addEventListener("click", async () => {
             return;
         }
 
-        const carpeta = await window.showDirectoryPicker({
-            mode: "readwrite"
-        });
+        const carpeta =
+            await window.showDirectoryPicker({
+                mode: "readwrite"
+            });
 
-        console.log("Carpeta seleccionada:", carpeta.name);
+        console.log(
+            "Carpeta seleccionada:",
+            carpeta.name
+        );
+
+        await Estado.guardarCarpeta(carpeta);
 
         await mostrarProyectos(carpeta);
 
@@ -94,6 +85,7 @@ botonCarpeta.addEventListener("click", async () => {
         pantallaDos.style.display = "block";
 
     } catch (error) {
+
         if (error.name === "AbortError") {
             console.log("Selección cancelada.");
             return;
@@ -104,4 +96,45 @@ botonCarpeta.addEventListener("click", async () => {
             error
         );
     }
-});
+}
+
+async function recuperarCarpeta() {
+    try {
+        const carpeta =
+            await Estado.obtenerCarpeta();
+
+        if (!carpeta) {
+            return;
+        }
+
+        const permiso =
+            await carpeta.queryPermission({
+                mode: "readwrite"
+            });
+
+        if (permiso !== "granted") {
+            console.log(
+                "Se necesita volver a autorizar la carpeta."
+            );
+            return;
+        }
+
+        await mostrarProyectos(carpeta);
+
+        pantallaUno.style.display = "none";
+        pantallaDos.style.display = "block";
+
+    } catch (error) {
+        console.error(
+            "No se pudo recuperar la carpeta:",
+            error
+        );
+    }
+}
+
+botonCarpeta.addEventListener(
+    "click",
+    seleccionarCarpeta
+);
+
+recuperarCarpeta();

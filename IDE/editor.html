@@ -48,16 +48,17 @@
     </header>
 
     <main id="Editor">
-
         <aside class="explorador">
             <div class="tituloExplorador">
-                <h2>Archivos</h2>
+                <h2>Proyecto</h2>
                 <div>
                     <button id="nuevoArchivo" type="button">+</button>
                     <button id="nuevaCarpeta" type="button">📁</button>
                 </div>
             </div>
-
+            <div class="rutaExplorador">
+                <span id="rutaProyecto">MiProyecto</span>
+            </div>
             <div id="listaArchivos"></div>
         </aside>
 
@@ -86,7 +87,20 @@
         </section>
 
     </main>
+    <div id="menuContextual" class="menuContextual">
+        <button id="contextNuevoArchivo" type="button">
+            Nuevo archivo
+        </button>
 
+        <button id="contextRenombrar" type="button">
+            Renombrar
+        </button>
+
+        <button id="contextEliminar" type="button">
+            Eliminar
+        </button>
+    </div>
+    <script src="../visualScripts/estado.js"></script>
     <script src="editor.js"></script>
 </body>
 </html>

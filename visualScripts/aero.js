@@ -1,7 +1,6 @@
 const botonPersonalizar = document.getElementById('botonPersonalizar');
 const ventanaPersonalizar = document.getElementById('ventanaPersonalizar');
 const cerrarPersonalizar = document.getElementById('cerrarPersonalizar');
-
 const temaClaro = document.getElementById('temaClaro');
 const temaOscuro = document.getElementById('temaOscuro');
 
@@ -24,16 +23,16 @@ document.addEventListener('click', (evento) => {
 });
 
 temaClaro.addEventListener('click', () => {
+    Estado.guardarTema('claro');
     document.body.classList.remove('tema-oscuro');
-    localStorage.setItem('elfentext-tema', 'claro');
 });
 
 temaOscuro.addEventListener('click', () => {
+    Estado.guardarTema('oscuro');
     document.body.classList.add('tema-oscuro');
-    localStorage.setItem('elfentext-tema', 'oscuro');
 });
 
-const temaGuardado = localStorage.getItem('elfentext-tema');
+const temaGuardado = Estado.obtenerTema();
 
 if (temaGuardado === 'oscuro') {
     document.body.classList.add('tema-oscuro');

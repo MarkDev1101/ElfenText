@@ -21,7 +21,7 @@ body {
 }
 
 body {
-    background: var(--color-fondo) url("logos\wallPaper\a1.png") center/cover fixed;
+    background-image: url("../logos/wallPaper.png");
 }
 
 #HeaderEditor {
@@ -319,4 +319,186 @@ body {
     overflow: auto;
     color: var(--color-texto-suave);
     font-family: Consolas, "Courier New", monospace;
+}
+
+/* Explorador de archivos */
+
+.explorador {
+    overflow: hidden;
+}
+
+.tituloExplorador {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+}
+
+.tituloExplorador h2 {
+    margin: 0;
+}
+
+.tituloExplorador button {
+    width: 32px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    background: var(--color-panel);
+    color: var(--color-texto);
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.tituloExplorador button:hover {
+    background: var(--color-acento);
+    color: var(--color-texto-claro);
+    transform: translateY(-1px);
+}
+
+.rutaExplorador {
+    margin: 0 10px 8px;
+    padding: 7px 10px;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    background: var(--color-panel);
+    color: var(--color-texto-suave);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#listaArchivos {
+    height: calc(100% - 105px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 7px 15px;
+}
+
+#listaArchivos::-webkit-scrollbar {
+    width: 8px;
+}
+
+#listaArchivos::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#listaArchivos::-webkit-scrollbar-thumb {
+    background: var(--color-borde);
+    border-radius: 10px;
+}
+
+.nodoProyecto,
+.nodoCarpeta {
+    width: 100%;
+}
+
+.filaExplorador,
+.filaArchivo {
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 3px 7px;
+    border-radius: 6px;
+    color: var(--color-texto);
+    cursor: pointer;
+    user-select: none;
+    transition:
+        background 0.12s ease,
+        color 0.12s ease;
+}
+
+.filaExplorador:hover,
+.filaArchivo:hover {
+    background: var(--color-blanco-suave);
+}
+
+.filaExplorador.seleccionado,
+.filaArchivo.seleccionado {
+    background: var(--color-acento);
+    color: var(--color-texto-claro);
+}
+
+.flechaCarpeta {
+    width: 20px;
+    height: 22px;
+    padding: 0;
+    margin-right: 2px;
+    border: 0;
+    background: transparent;
+    color: var(--color-texto-suave);
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.filaExplorador.seleccionado .flechaCarpeta {
+    color: var(--color-texto-claro);
+}
+
+.nombreExplorador {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+.contenidoCarpeta {
+    margin-left: 18px;
+    padding-left: 8px;
+    border-left: 1px solid var(--color-borde);
+}
+
+.filaArchivo {
+    padding-left: 8px;
+}
+
+.carpetaVacia {
+    margin-left: 20px;
+    padding: 5px 8px;
+    color: var(--color-texto-suave);
+    font-size: 12px;
+    font-style: italic;
+}
+
+.nodoProyecto > .filaExplorador {
+    font-weight: 600;
+}
+
+.nodoCarpeta > .filaExplorador {
+    font-weight: 500;
+}
+
+.menuContextual {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    min-width: 180px;
+    padding: 6px;
+    border: 2px solid var(--color-borde);
+    border-radius: 10px;
+    background: var(--color-panel);
+    box-shadow: 0 8px 20px var(--color-sombra);
+}
+
+.menuContextual.visible {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuContextual button {
+    padding: 9px 12px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--color-texto);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.menuContextual button:hover {
+    background: var(--color-acento);
+    color: var(--color-texto-claro);
 }
