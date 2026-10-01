@@ -56,9 +56,6 @@
                     <button id="nuevaCarpeta" type="button">📁</button>
                 </div>
             </div>
-            <div class="rutaExplorador">
-                <span id="rutaProyecto">MiProyecto</span>
-            </div>
             <div id="listaArchivos"></div>
         </aside>
 
@@ -87,20 +84,25 @@
         </section>
 
     </main>
-    <div id="menuContextual" class="menuContextual">
-        <button id="contextNuevoArchivo" type="button">
-            Nuevo archivo
+    <div id="menuArchivos" class="menuArchivos">
+        <button type="button" id="menuNuevoArchivo">
+            📄 Nuevo archivo
         </button>
 
-        <button id="contextRenombrar" type="button">
-            Renombrar
+        <button type="button" id="menuNuevaCarpeta">
+            📁 Nueva carpeta
         </button>
 
-        <button id="contextEliminar" type="button">
-            Eliminar
+        <button type="button" id="menuRenombrar">
+            ✏️ Renombrar
+        </button>
+
+        <button type="button" id="menuEliminar">
+            🗑️ Eliminar
         </button>
     </div>
     <script src="../visualScripts/estado.js"></script>
     <script src="editor.js"></script>
+    <script src="files.js"></script>
 </body>
 </html>

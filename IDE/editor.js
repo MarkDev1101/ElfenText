@@ -13,43 +13,6 @@ const nombreArchivo = $("nombreArchivo");
 const numerosLinea = $("numerosLinea");
 const rutaProyecto = $("rutaProyecto");
 
-function cerrarMenuContextual() {
-    menuContextual?.classList.remove(
-        "visible"
-    );
-
-    elementoContextual = null;
-    handleContextual = null;
-    carpetaContextual = null;
-    tipoContextual = null;
-}
-
-function mostrarMenuContextual(
-    evento,
-    elemento,
-    handle,
-    tipo,
-    carpetaPadre = null
-) {
-    evento.preventDefault();
-    evento.stopPropagation();
-
-    elementoContextual = elemento;
-    handleContextual = handle;
-    tipoContextual = tipo;
-    carpetaContextual = carpetaPadre;
-
-    menuContextual.style.left =
-        `${evento.clientX}px`;
-
-    menuContextual.style.top =
-        `${evento.clientY}px`;
-
-    menuContextual.classList.add(
-        "visible"
-    );
-}
-
 function aplicarTema() {
     document.body.classList.toggle(
         "tema-oscuro",
@@ -60,12 +23,14 @@ function aplicarTema() {
 function actualizarLineas() {
     if (!numerosLinea) return;
 
-    const lineas = editorTexto.value.split("\n").length;
+    const cantidad =
+        editorTexto.value.split("\n").length;
 
-    numerosLinea.innerHTML = Array.from(
-        { length: lineas },
-        (_, i) => i + 1
-    ).join("<br>");
+    numerosLinea.innerHTML =
+        Array.from(
+            { length: cantidad },
+            (_, i) => i + 1
+        ).join("<br>");
 }
 
 editorTexto.addEventListener(
@@ -105,9 +70,11 @@ async function cargarProyecto() {
             return;
         }
 
-        nombreProyecto.textContent = nombre;
+        nombreProyecto.textContent =
+            nombre;
 
-        carpetaSeleccionada = proyecto;
+        carpetaSeleccionada =
+            proyecto;
 
         rutaActual = [
             {
@@ -152,7 +119,8 @@ async function obtenerEntradas(carpeta) {
 
     return entradas.sort((a, b) => {
         if (
-            a.handle.kind !== b.handle.kind
+            a.handle.kind !==
+            b.handle.kind
         ) {
             return a.handle.kind ===
                 "directory"
@@ -188,7 +156,8 @@ async function construirExplorador() {
             ":scope > .contenidoCarpeta"
         );
 
-    contenido.style.display = "block";
+    contenido.style.display =
+        "block";
 
     raiz.querySelector(
         ":scope > .filaExplorador .flechaCarpeta"
@@ -213,6 +182,7 @@ function crearNodoCarpeta(
         : "nodoCarpeta";
 
     nodo.handle = handle;
+    nodo.nombre = nombre;
 
     const fila =
         document.createElement("div");
@@ -254,18 +224,6 @@ function crearNodoCarpeta(
     nodo.append(
         fila,
         contenido
-    );
-
-    fila.addEventListener(
-        "contextmenu",
-        evento => {
-            mostrarMenuContextual(
-                evento,
-                nodo,
-                handle,
-                "carpeta"
-            );
-        }
     );
 
     fila.addEventListener(
@@ -388,19 +346,6 @@ function crearNodoArchivo(
             await abrirArchivo(
                 handle,
                 nombre,
-                carpetaPadre
-            );
-        }
-    );
-
-    fila.addEventListener(
-        "contextmenu",
-        evento => {
-            mostrarMenuContextual(
-                evento,
-                fila,
-                handle,
-                "archivo",
                 carpetaPadre
             );
         }
@@ -722,7 +667,7 @@ async function eliminarArchivo() {
 
     } catch (error) {
         console.error(
-            "Error al eliminar:",
+            "Error al eliminar archivo:",
             error
         );
     }
@@ -772,7 +717,9 @@ async function eliminarCarpeta() {
 
         await padre.removeEntry(
             nombre,
-            { recursive: true }
+            {
+                recursive: true
+            }
         );
 
         carpetaSeleccionada =
@@ -838,153 +785,6 @@ $("cerrarProyecto")?.addEventListener(
     () => {
         window.location.href =
             "../index.html";
-    }
-);
-
-const botonPersonalizar =
-    $("botonPersonalizar");
-
-const ventanaPersonalizar =
-    $("ventanaPersonalizar");
-
-const cerrarPersonalizar =
-    $("cerrarPersonalizar");
-
-botonPersonalizar?.addEventListener(
-    "click",
-    () => {
-        ventanaPersonalizar?.classList.toggle(
-            "visible"
-        );
-    }
-);
-
-cerrarPersonalizar?.addEventListener(
-    "click",
-    () => {
-        ventanaPersonalizar?.classList.remove(
-            "visible"
-        );
-    }
-);
-
-$("temaClaro")?.addEventListener(
-    "click",
-    () => {
-        Estado.guardarTema("claro");
-        aplicarTema();
-    }
-);
-
-$("temaOscuro")?.addEventListener(
-    "click",
-    () => {
-        Estado.guardarTema("oscuro");
-        aplicarTema();
-    }
-);
-
-contextNuevoArchivo?.addEventListener(
-    "click",
-    async () => {
-        cerrarMenuContextual();
-
-        if (
-            tipoContextual !== "carpeta"
-        ) {
-            return;
-        }
-
-        const nombre =
-            prompt(
-                "Nombre del archivo:"
-            );
-
-        if (!nombre) return;
-
-        try {
-            const permiso =
-                await handleContextual
-                    .requestPermission({
-                        mode: "readwrite"
-                    });
-
-            if (permiso !== "granted") {
-                return;
-            }
-
-            await handleContextual
-                .getFileHandle(
-                    nombre,
-                    {
-                        create: true
-                    }
-                );
-
-            await refrescarCarpeta(
-                handleContextual
-            );
-
-        } catch (error) {
-            console.error(
-                "No se pudo crear el archivo:",
-                error
-            );
-        }
-    }
-);
-
-contextRenombrar?.addEventListener(
-    "click",
-    async () => {
-        const tipo =
-            tipoContextual;
-
-        const handle =
-            handleContextual;
-
-        cerrarMenuContextual();
-
-        if (!handle) return;
-
-        const nombreActual =
-            handle.name;
-
-        const nuevoNombre =
-            prompt(
-                "Nuevo nombre:",
-                nombreActual
-            );
-
-        if (
-            !nuevoNombre ||
-            nuevoNombre === nombreActual
-        ) {
-            return;
-        }
-
-        try {
-            if (tipo === "archivo") {
-                await renombrarArchivo(
-                    handle,
-                    nuevoNombre,
-                    carpetaContextual
-                );
-            }
-
-            if (tipo === "carpeta") {
-                await renombrarCarpeta(
-                    handle,
-                    nuevoNombre
-                );
-            }
-
-        } catch (error) {
-            console.error(
-                "No se pudo renombrar:",
-                error
-            );
-        }
     }
 );
 

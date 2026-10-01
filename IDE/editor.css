@@ -7,7 +7,6 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
-    
 }
 
 body {
@@ -15,13 +14,17 @@ body {
     display: grid;
     grid-template-rows: 65px 1fr;
     overflow: hidden;
-    background: var(--color-fondo);
+    background:
+        linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--color-fondo) 82%, transparent),
+            color-mix(in srgb, var(--color-main) 75%, transparent)
+        ),
+        url("../logos/wallPaper.png");
+    background-size: cover;
+    background-position: center;
     color: var(--color-texto);
     font-family: "Segoe UI", Tahoma, sans-serif;
-}
-
-body {
-    background-image: url("../logos/wallPaper.png");
 }
 
 #HeaderEditor {
@@ -29,9 +32,11 @@ body {
     align-items: center;
     gap: 15px;
     padding: 10px 20px;
-    background: var(--color-header);
+    background: color-mix(in srgb, var(--color-header) 90%, transparent);
     border-bottom: 2px solid var(--color-agua-oscura);
     box-shadow: 0 3px 10px var(--color-sombra);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 #HeaderEditor h1 {
@@ -54,7 +59,8 @@ body {
 }
 
 #HeaderEditor button,
-.accionesArchivos button {
+.accionesArchivos button,
+#botonPersonalizar {
     padding: 7px 12px;
     border: 1px solid var(--color-borde);
     border-radius: 7px;
@@ -63,174 +69,16 @@ body {
     font: inherit;
     cursor: pointer;
     box-shadow: 0 2px 5px var(--color-sombra);
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
 }
 
 #HeaderEditor button:hover,
-.accionesArchivos button:hover {
-    background: var(--color-acento-hover);
-}
-
-#Editor {
-    min-height: 0;
-    display: grid;
-    grid-template-columns: 245px 1fr;
-}
-
-.explorador {
-    min-height: 0;
-    overflow-y: auto;
-    padding: 15px;
-    background: var(--color-sidebar);
-    border-right: 2px solid var(--color-agua-oscura);
-    box-shadow: 3px 0 10px var(--color-sombra);
-}
-
-.tituloExplorador {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.tituloExplorador h2 {
-    margin: 0 0 12px;
-    color: var(--color-blanco);
-}
-
-.accionesArchivos {
-    display: flex;
-    gap: 5px;
-}
-
-.accionesArchivos button {
-    padding: 4px 8px;
-}
-
-#listaArchivos {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.archivo,
-.carpeta {
-    padding: 7px 9px;
-    border-radius: 5px;
-    color: var(--color-blanco-suave);
-    cursor: pointer;
-}
-
-.archivo:hover,
-.carpeta:hover {
-    background: var(--color-agua);
-}
-
-.areaEditor {
-    min-width: 0;
-    min-height: 0;
-    display: grid;
-    grid-template-rows: 35px 1fr;
-    background: linear-gradient(
-        135deg,
-        var(--color-main-inicio),
-        var(--color-main-final)
-    );
-}
-
-.barraArchivo {
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    background: var(--color-panel);
-    border-bottom: 1px solid var(--color-borde);
-    color: var(--color-texto);
-}
-
-#editorTexto {
-    width: 100%;
-    height: 100%;
-    resize: none;
-    padding: 18px;
-    border: 0;
-    outline: none;
-    background: var(--color-panel);
-    color: var(--color-texto);
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-.personalizarContenedor {
-    position: relative;
-}
-
-#botonPersonalizar {
-    display: block;
-    padding: 7px 12px;
-    border: 1px solid var(--color-borde);
-    border-radius: 7px;
-    background: var(--color-agua);
-    color: var(--color-blanco);
-    font: inherit;
-    cursor: pointer;
-    box-shadow: 0 2px 5px var(--color-sombra);
-}
-
+.accionesArchivos button:hover,
 #botonPersonalizar:hover {
     background: var(--color-acento-hover);
-}
-
-.personalizarContenedor {
-    position: relative;
-}
-
-.ventanaPersonalizar {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    width: 260px;
-    padding: 15px;
-    background: var(--color-ventana-fondo);
-    color: var(--color-ventana-texto);
-    border: 1px solid var(--color-borde);
-    border-radius: 10px;
-    box-shadow: 0 6px 18px var(--color-sombra);
-    z-index: 1000;
-}
-
-.ventanaPersonalizar.visible {
-    display: block;
-}
-
-.contenidoPersonalizar {
-    position: relative;
-}
-
-.contenidoPersonalizar h2 {
-    margin: 0 0 8px;
-    color: var(--color-ventana-titulo);
-    font-size: 18px;
-}
-
-.contenidoPersonalizar p {
-    margin: 0 0 14px;
-    color: var(--color-ventana-texto-suave);
-}
-
-#cerrarPersonalizar {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    padding: 2px 7px;
-}
-
-.opcionesTema {
-    display: flex;
-    gap: 8px;
-}
-
-.opcionesTema button {
-    flex: 1;
+    transform: translateY(-1px);
 }
 
 #Editor {
@@ -239,92 +87,15 @@ body {
     grid-template-columns: 245px 1fr;
 }
 
-.zonaTrabajo {
-    min-width: 0;
-    min-height: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 150px;
-}
-
-.areaEditor,
-.vistaPrevia,
-.consola {
-    min-width: 0;
-    min-height: 0;
-}
-
-.areaEditor {
-    display: grid;
-    grid-template-rows: 35px 1fr;
-    border-right: 1px solid var(--color-borde);
-}
-
-.editorCodigo {
-    min-height: 0;
-    display: grid;
-    grid-template-columns: 50px 1fr;
-    overflow: hidden;
-    background: var(--color-panel);
-}
-
-#numerosLinea {
-    padding: 18px 10px;
-    overflow: hidden;
-    text-align: right;
-    user-select: none;
-    background: var(--color-fondo);
-    color: var(--color-texto-suave);
-    border-right: 1px solid var(--color-borde);
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-#editorTexto {
-    width: 100%;
-    height: 100%;
-    padding: 18px;
-    resize: none;
-    border: 0;
-    outline: none;
-    overflow: auto;
-    background: var(--color-panel);
-    color: var(--color-texto);
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-.vistaPrevia {
-    background: var(--color-fondo);
-}
-
-.consola {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-rows: 30px 1fr;
-    border-top: 2px solid var(--color-borde);
-    background: var(--color-panel);
-}
-
-.barraConsola {
-    padding: 6px 12px;
-    background: var(--color-header);
-    color: var(--color-blanco);
-}
-
-#salidaConsola {
-    padding: 10px;
-    overflow: auto;
-    color: var(--color-texto-suave);
-    font-family: Consolas, "Courier New", monospace;
-}
-
-/* Explorador de archivos */
-
 .explorador {
+    min-height: 0;
     overflow: hidden;
+    padding: 0;
+    background: color-mix(in srgb, var(--color-sidebar) 88%, transparent);
+    border-right: 2px solid var(--color-agua-oscura);
+    box-shadow: 3px 0 10px var(--color-sombra);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 }
 
 .tituloExplorador {
@@ -337,6 +108,12 @@ body {
 
 .tituloExplorador h2 {
     margin: 0;
+    color: var(--color-blanco);
+}
+
+.accionesArchivos {
+    display: flex;
+    gap: 5px;
 }
 
 .tituloExplorador button {
@@ -348,7 +125,9 @@ body {
     background: var(--color-panel);
     color: var(--color-texto);
     cursor: pointer;
-    transition: 0.15s ease;
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
 }
 
 .tituloExplorador button:hover {
@@ -470,27 +249,248 @@ body {
     font-weight: 500;
 }
 
-.menuContextual {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    min-width: 180px;
-    padding: 6px;
-    border: 2px solid var(--color-borde);
-    border-radius: 10px;
-    background: var(--color-panel);
-    box-shadow: 0 8px 20px var(--color-sombra);
+.zonaTrabajo {
+    min-width: 0;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 150px;
 }
 
-.menuContextual.visible {
+.areaEditor,
+.vistaPrevia,
+.consola {
+    min-width: 0;
+    min-height: 0;
+}
+
+.areaEditor {
+    display: grid;
+    grid-template-rows: 35px 1fr;
+    border-right: 1px solid var(--color-borde);
+    background: color-mix(in srgb, var(--color-panel) 60%, transparent);
+    box-shadow: inset 0 0 35px color-mix(in srgb, var(--color-acento) 8%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.barraArchivo {
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    background: color-mix(in srgb, var(--color-panel) 65%, transparent);
+    border-bottom: 1px solid var(--color-borde);
+    color: var(--color-texto);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.editorCodigo {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color-panel) 65%, transparent);
+}
+
+#numerosLinea {
+    margin: 0;
+    padding: 16px 10px;
+    overflow: hidden;
+    text-align: right;
+    user-select: none;
+    background: color-mix(in srgb, var(--color-fondo) 65%, transparent);
+    color: var(--color-texto-suave);
+    border-right: 1px solid var(--color-borde);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 15px;
+    line-height: 32px;
+    white-space: pre;
+}
+
+#editorTexto {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 16px 20px;
+    resize: none;
+    border: 0;
+    outline: none;
+    overflow: auto;
+    color: var(--color-texto);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 15px;
+    line-height: 32px;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 31px,
+            color-mix(in srgb, var(--color-acento) 18%, transparent) 31px,
+            color-mix(in srgb, var(--color-acento) 18%, transparent) 32px
+        ),
+        linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--color-cielo-claro) 12%, transparent),
+            color-mix(in srgb, var(--color-acento) 7%, transparent),
+            color-mix(in srgb, var(--color-main-final) 12%, transparent)
+        ),
+        color-mix(in srgb, var(--color-panel) 45%, transparent);
+    background-size:
+        100% 32px,
+        100% 100%,
+        100% 100%;
+    background-position:
+        0 16px,
+        0 0,
+        0 0;
+    box-shadow:
+        inset 0 0 35px color-mix(in srgb, var(--color-acento) 10%, transparent),
+        inset 0 0 80px color-mix(in srgb, var(--color-cielo) 5%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#editorTexto:focus {
+    box-shadow:
+        inset 0 0 35px color-mix(in srgb, var(--color-acento) 15%, transparent),
+        inset 0 0 80px color-mix(in srgb, var(--color-cielo) 8%, transparent),
+        0 0 0 1px var(--color-acento);
+}
+
+.vistaPrevia {
+    background: color-mix(in srgb, var(--color-fondo) 45%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.consola {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-rows: 30px 1fr;
+    border-top: 2px solid var(--color-borde);
+    background:
+        linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--color-agua) 18%, transparent),
+            color-mix(in srgb, var(--color-acento) 8%, transparent),
+            color-mix(in srgb, var(--color-cielo) 14%, transparent)
+        ),
+        color-mix(in srgb, var(--color-panel) 60%, transparent);
+    box-shadow:
+        inset 0 0 35px color-mix(in srgb, var(--color-acento) 8%, transparent),
+        0 -5px 20px var(--color-sombra);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.barraConsola {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    background: color-mix(in srgb, var(--color-header) 75%, transparent);
+    color: var(--color-blanco);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+#salidaConsola {
+    padding: 10px;
+    overflow: auto;
+    color: var(--color-texto-suave);
+    font-family: Consolas, "Courier New", monospace;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 27px,
+            color-mix(in srgb, var(--color-acento) 8%, transparent) 27px,
+            color-mix(in srgb, var(--color-acento) 8%, transparent) 28px
+        );
+    background-size: 100% 28px;
+}
+
+.personalizarContenedor {
+    position: relative;
+}
+
+.ventanaPersonalizar {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 260px;
+    padding: 15px;
+    background: color-mix(in srgb, var(--color-ventana-fondo) 88%, transparent);
+    color: var(--color-ventana-texto);
+    border: 1px solid var(--color-borde);
+    border-radius: 10px;
+    box-shadow: 0 6px 18px var(--color-sombra);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    z-index: 1000;
+}
+
+.ventanaPersonalizar.visible {
+    display: block;
+}
+
+.contenidoPersonalizar {
+    position: relative;
+}
+
+.contenidoPersonalizar h2 {
+    margin: 0 0 8px;
+    color: var(--color-ventana-titulo);
+    font-size: 18px;
+}
+
+.contenidoPersonalizar p {
+    margin: 0 0 14px;
+    color: var(--color-ventana-texto-suave);
+}
+
+#cerrarPersonalizar {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    padding: 2px 7px;
+}
+
+.opcionesTema {
+    display: flex;
+    gap: 8px;
+}
+
+.opcionesTema button {
+    flex: 1;
+}
+
+.menuContextual,
+.menuArchivos {
+    position: fixed;
+    z-index: 9999;
+    display: none;
+    min-width: 180px;
+    padding: 6px;
+    border: 1px solid var(--color-borde);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--color-panel) 88%, transparent);
+    box-shadow: 0 8px 25px var(--color-sombra);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.menuContextual.visible,
+.menuArchivos.visible {
     display: flex;
     flex-direction: column;
 }
 
-.menuContextual button {
+.menuContextual button,
+.menuArchivos button {
     padding: 9px 12px;
     border: 0;
-    border-radius: 7px;
+    border-radius: 6px;
     background: transparent;
     color: var(--color-texto);
     font: inherit;
@@ -498,7 +498,80 @@ body {
     cursor: pointer;
 }
 
-.menuContextual button:hover {
+.menuContextual button:hover,
+.menuArchivos button:hover {
     background: var(--color-acento);
     color: var(--color-texto-claro);
+}
+
+body.tema-oscuro {
+    background:
+        linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--color-fondo) 88%, transparent),
+            color-mix(in srgb, var(--color-main) 78%, transparent)
+        ),
+        url("../logos/wallPaper.png");
+    background-size: cover;
+    background-position: center;
+}
+
+body.tema-oscuro #editorTexto {
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 31px,
+            color-mix(in srgb, var(--color-acento) 20%, transparent) 31px,
+            color-mix(in srgb, var(--color-acento) 20%, transparent) 32px
+        ),
+        linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--color-agua) 18%, transparent),
+            color-mix(in srgb, var(--color-acento) 8%, transparent),
+            color-mix(in srgb, var(--color-main) 14%, transparent)
+        ),
+        color-mix(in srgb, var(--color-panel) 55%, transparent);
+    background-size:
+        100% 32px,
+        100% 100%,
+        100% 100%;
+    background-position:
+        0 16px,
+        0 0,
+        0 0;
+    box-shadow:
+        inset 0 0 40px color-mix(in srgb, var(--color-acento) 12%, transparent),
+        inset 0 0 80px color-mix(in srgb, var(--color-cielo) 8%, transparent);
+}
+
+body.tema-oscuro .areaEditor {
+    background: color-mix(in srgb, var(--color-panel) 55%, transparent);
+}
+
+body.tema-oscuro .barraArchivo {
+    background: color-mix(in srgb, var(--color-header) 35%, transparent);
+}
+
+body.tema-oscuro #numerosLinea {
+    background: color-mix(in srgb, var(--color-fondo) 65%, transparent);
+}
+
+body.tema-oscuro .vistaPrevia {
+    background: color-mix(in srgb, var(--color-fondo) 50%, transparent);
+}
+
+body.tema-oscuro .consola {
+    background:
+        linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--color-agua-oscura) 35%, transparent),
+            color-mix(in srgb, var(--color-acento) 10%, transparent),
+            color-mix(in srgb, var(--color-main) 25%, transparent)
+        ),
+        color-mix(in srgb, var(--color-panel) 65%, transparent);
+}
+
+body.tema-oscuro .barraConsola {
+    background: color-mix(in srgb, var(--color-header) 65%, transparent);
 }
