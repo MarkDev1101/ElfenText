@@ -19,10 +19,7 @@ body {
             135deg,
             color-mix(in srgb, var(--color-fondo) 82%, transparent),
             color-mix(in srgb, var(--color-main) 75%, transparent)
-        ),
-        url("../logos/wallPaper.png");
-    background-size: cover;
-    background-position: center;
+        );
     color: var(--color-texto);
     font-family: "Segoe UI", Tahoma, sans-serif;
 }
@@ -32,11 +29,10 @@ body {
     align-items: center;
     gap: 15px;
     padding: 10px 20px;
+    overflow: visible;
     background: color-mix(in srgb, var(--color-header) 90%, transparent);
     border-bottom: 2px solid var(--color-agua-oscura);
     box-shadow: 0 3px 10px var(--color-sombra);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
 }
 
 #HeaderEditor h1 {
@@ -69,9 +65,7 @@ body {
     font: inherit;
     cursor: pointer;
     box-shadow: 0 2px 5px var(--color-sombra);
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease;
+
 }
 
 #HeaderEditor button:hover,
@@ -125,28 +119,12 @@ body {
     background: var(--color-panel);
     color: var(--color-texto);
     cursor: pointer;
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease;
 }
 
 .tituloExplorador button:hover {
     background: var(--color-acento);
     color: var(--color-texto-claro);
     transform: translateY(-1px);
-}
-
-.rutaExplorador {
-    margin: 0 10px 8px;
-    padding: 7px 10px;
-    border: 1px solid var(--color-borde);
-    border-radius: 8px;
-    background: var(--color-panel);
-    color: var(--color-texto-suave);
-    font-size: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 #listaArchivos {
@@ -184,9 +162,6 @@ body {
     color: var(--color-texto);
     cursor: pointer;
     user-select: none;
-    transition:
-        background 0.12s ease,
-        color 0.12s ease;
 }
 
 .filaExplorador:hover,
@@ -269,7 +244,9 @@ body {
     grid-template-rows: 35px 1fr;
     border-right: 1px solid var(--color-borde);
     background: color-mix(in srgb, var(--color-panel) 60%, transparent);
-    box-shadow: inset 0 0 35px color-mix(in srgb, var(--color-acento) 8%, transparent);
+    box-shadow:
+        inset 0 0 35px
+        color-mix(in srgb, var(--color-acento) 8%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
@@ -345,16 +322,20 @@ body {
         0 0,
         0 0;
     box-shadow:
-        inset 0 0 35px color-mix(in srgb, var(--color-acento) 10%, transparent),
-        inset 0 0 80px color-mix(in srgb, var(--color-cielo) 5%, transparent);
+        inset 0 0 35px
+        color-mix(in srgb, var(--color-acento) 10%, transparent),
+        inset 0 0 80px
+        color-mix(in srgb, var(--color-cielo) 5%, transparent);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 
 #editorTexto:focus {
     box-shadow:
-        inset 0 0 35px color-mix(in srgb, var(--color-acento) 15%, transparent),
-        inset 0 0 80px color-mix(in srgb, var(--color-cielo) 8%, transparent),
+        inset 0 0 35px
+        color-mix(in srgb, var(--color-acento) 15%, transparent),
+        inset 0 0 80px
+        color-mix(in srgb, var(--color-cielo) 8%, transparent),
         0 0 0 1px var(--color-acento);
 }
 
@@ -378,7 +359,8 @@ body {
         ),
         color-mix(in srgb, var(--color-panel) 60%, transparent);
     box-shadow:
-        inset 0 0 35px color-mix(in srgb, var(--color-acento) 8%, transparent),
+        inset 0 0 35px
+        color-mix(in srgb, var(--color-acento) 8%, transparent),
         0 -5px 20px var(--color-sombra);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -418,16 +400,7 @@ body {
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
-    width: 260px;
-    padding: 15px;
-    background: color-mix(in srgb, var(--color-ventana-fondo) 88%, transparent);
-    color: var(--color-ventana-texto);
-    border: 1px solid var(--color-borde);
-    border-radius: 10px;
-    box-shadow: 0 6px 18px var(--color-sombra);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    z-index: 1000;
+    z-index: 99999;
 }
 
 .ventanaPersonalizar.visible {
@@ -436,10 +409,33 @@ body {
 
 .contenidoPersonalizar {
     position: relative;
+    width: 300px;
+    padding: 18px;
+    border: 2px solid var(--color-borde);
+    border-radius: 14px;
+    background: var(--color-ventana-fondo);
+    color: var(--color-ventana-texto);
+    box-shadow:
+        0 10px 24px var(--color-sombra),
+        inset 0 2px 4px rgba(255, 255, 255, .9),
+        inset 0 -6px 14px rgba(0, 130, 180, .12);
+}
+
+.contenidoPersonalizar::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    right: 18px;
+    width: 16px;
+    height: 16px;
+    border-left: 2px solid var(--color-borde);
+    border-top: 2px solid var(--color-borde);
+    background: var(--color-ventana-fondo);
+    transform: rotate(45deg);
 }
 
 .contenidoPersonalizar h2 {
-    margin: 0 0 8px;
+    margin: 0 30px 6px 0;
     color: var(--color-ventana-titulo);
     font-size: 18px;
 }
@@ -447,37 +443,60 @@ body {
 .contenidoPersonalizar p {
     margin: 0 0 14px;
     color: var(--color-ventana-texto-suave);
+    font-size: 14px;
 }
 
 #cerrarPersonalizar {
     position: absolute;
-    top: -5px;
-    right: -5px;
-    padding: 2px 7px;
+    top: 8px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid var(--color-borde);
+    border-radius: 7px;
+    background: var(--color-blanco-suave);
+    color: var(--color-texto);
+    font-size: 19px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, .9),
+        0 2px 4px var(--color-sombra);
+}
+
+#cerrarPersonalizar:hover {
+    background: var(--color-acento);
+    color: var(--color-blanco);
 }
 
 .opcionesTema {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
 }
 
 .opcionesTema button {
-    flex: 1;
+    min-height: 52px;
+    padding: 8px;
+    border: 2px solid var(--color-borde);
+    border-radius: 10px;
+    background: var(--color-blanco-suave);
+    color: var(--color-ventana-texto);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, .7),
+        0 3px 6px var(--color-sombra);
 }
 
-.menuContextual,
-.menuArchivos {
-    position: fixed;
-    z-index: 9999;
-    display: none;
-    min-width: 180px;
-    padding: 6px;
-    border: 1px solid var(--color-borde);
-    border-radius: 10px;
-    background: color-mix(in srgb, var(--color-panel) 88%, transparent);
-    box-shadow: 0 8px 25px var(--color-sombra);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+.opcionesTema button:hover {
+    background: var(--color-acento);
+    color: var(--color-blanco);
+    transform: translateY(-1px);
 }
 
 .menuContextual.visible,
@@ -510,10 +529,7 @@ body.tema-oscuro {
             135deg,
             color-mix(in srgb, var(--color-fondo) 88%, transparent),
             color-mix(in srgb, var(--color-main) 78%, transparent)
-        ),
-        url("../logos/wallPaper.png");
-    background-size: cover;
-    background-position: center;
+        );
 }
 
 body.tema-oscuro #editorTexto {
@@ -541,8 +557,10 @@ body.tema-oscuro #editorTexto {
         0 0,
         0 0;
     box-shadow:
-        inset 0 0 40px color-mix(in srgb, var(--color-acento) 12%, transparent),
-        inset 0 0 80px color-mix(in srgb, var(--color-cielo) 8%, transparent);
+        inset 0 0 40px
+        color-mix(in srgb, var(--color-acento) 12%, transparent),
+        inset 0 0 80px
+        color-mix(in srgb, var(--color-cielo) 8%, transparent);
 }
 
 body.tema-oscuro .areaEditor {
@@ -574,4 +592,95 @@ body.tema-oscuro .consola {
 
 body.tema-oscuro .barraConsola {
     background: color-mix(in srgb, var(--color-header) 65%, transparent);
+}
+
+.menuArchivos {
+    position: fixed;
+    z-index: 99999;
+
+    display: none;
+    min-width: 190px;
+    padding: 6px;
+
+    border: 1px solid var(--color-borde);
+    border-radius: 10px;
+
+    background: var(--color-ventana-fondo);
+    box-shadow: 0 8px 25px var(--color-sombra);
+
+    overflow: hidden;
+
+    position: fixed;
+    display: none;
+}
+
+.menuArchivos.visible {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuArchivos button {
+    width: 100%;
+    padding: 9px 12px;
+
+    border: 0;
+    border-radius: 6px;
+
+    background: transparent;
+    color: var(--color-texto);
+
+    font: inherit;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.menuArchivos button:hover {
+    background: var(--color-acento);
+    color: var(--color-texto-claro);
+}
+
+#compilarProyecto {
+    padding: 9px 16px;
+    border: 2px solid var(--color-borde);
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--color-acento),
+            var(--color-agua)
+        );
+
+    color: var(--color-blanco);
+    font: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, .65),
+        0 3px 7px var(--color-sombra);
+
+    text-shadow:
+        0 1px 2px rgba(0, 60, 100, .45);
+
+    transition:
+        background .15s ease,
+        transform .15s ease;
+}
+
+#compilarProyecto:hover {
+    background:
+        linear-gradient(
+            180deg,
+            var(--color-acento-hover),
+            var(--color-agua-oscura)
+        );
+
+    transform: translateY(-1px);
+}
+
+#compilarProyecto:active {
+    transform: translateY(1px);
 }

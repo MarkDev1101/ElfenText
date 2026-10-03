@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ElfenText - Editor</title>
+        <link rel="stylesheet" href="../css/themes.css">
+        <link rel="stylesheet" href="editor.css">
+    </head>
+    <body>
+        <header id="HeaderEditor">
+            <h1>ElfenText</h1>
+            <span id="nombreProyecto">Cargando...</span>
+
+            <nav>
+                <button id="compilarProyecto" type="button">
+                    ▶ Compilar
+                </button>
+
+                <button id="guardarArchivo" type="button">Guardar</button>
+                <button id="eliminarArchivo" type="button">Eliminar</button>
+
+                <div class="personalizarContenedor">
+                    <button id="botonPersonalizar" type="button">
+                        Personalizar
+                    </button>
+
+                    <div id="ventanaPersonalizar" class="ventanaPersonalizar">
+                        <div class="contenidoPersonalizar">
+                            <button id="cerrarPersonalizar" type="button">×</button>
+
+                            <h2>Personalizar ElfenText</h2>
+                            <p>Elige el aspecto de la interfaz.</p>
+
+                            <div class="opcionesTema">
+                                <button id="temaClaro" type="button">
+                                    ☀ Claro
+                                </button>
+
+                                <button id="temaOscuro" type="button">
+                                    ⏾ Oscuro
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="cerrarProyecto" type="button">Cerrar</button>
+            </nav>
+        </header>
+
+        <main id="Editor">
+            <aside class="explorador">
+                <div class="tituloExplorador">
+                    <h2>Proyecto</h2>
+                    <div>
+                        <button id="nuevoArchivo" type="button">+</button>
+                        <button id="nuevaCarpeta" type="button">📁</button>
+                    </div>
+                </div>
+                <div id="listaArchivos"></div>
+            </aside>
+
+            <section class="zonaTrabajo">
+
+                <div class="areaEditor">
+                    <div class="barraArchivo">
+                        <span id="nombreArchivo">Ningún archivo abierto</span>
+                    </div>
+
+                    <div class="editorCodigo">
+                        <div id="numerosLinea"></div>
+                        <textarea id="editorTexto" spellcheck="false"></textarea>
+                    </div>
+                </div>
+
+                <section class="vistaPrevia">
+                    <!-- Aquí irá el compilador -->
+                </section>
+
+                <section class="consola">
+                    <div class="barraConsola">Consola</div>
+                    <div id="salidaConsola"></div>
+                </section>
+
+            </section>
+
+        </main>
+        <div id="menuArchivos" class="menuArchivos">
+            <button type="button" id="menuNuevoArchivo">
+                📄 Nuevo archivo
+            </button>
+
+            <button type="button" id="menuNuevaCarpeta">
+                📁 Nueva carpeta
+            </button>
+
+            <button type="button" id="menuRenombrar">
+                ✏️ Renombrar
+            </button>
+
+            <button type="button" id="menuEliminar">
+                🗑️ Eliminar
+            </button>
+        </div>
+    </body>
+
+    <script src="../visualScripts/estado.js"></script>
+    <script src="../visualScripts/aero.js"></script>
+    <script src="editor.js"></script>
+    <script src="files.js"></script>
+</html>

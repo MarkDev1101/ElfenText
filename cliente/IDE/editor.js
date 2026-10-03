@@ -788,6 +788,45 @@ $("cerrarProyecto")?.addEventListener(
     }
 );
 
+$("cerrarProyecto")?.addEventListener(
+    "click",
+    () => {
+        window.location.href =
+            "../index.html";
+    }
+);
+
+async function compilarProyecto() {
+    try {
+        const respuesta =
+            await fetch(
+                "http://localhost:3000/compile",
+                {
+                    method: "POST"
+                }
+            );
+
+        const resultado =
+            await respuesta.json();
+
+        console.log(
+            "Respuesta del motor:",
+            resultado
+        );
+
+    } catch (error) {
+        console.error(
+            "Error al conectar con el motor:",
+            error
+        );
+    }
+}
+
+$("compilarProyecto")?.addEventListener(
+    "click",
+    compilarProyecto
+);
+
 aplicarTema();
 actualizarLineas();
 cargarProyecto();

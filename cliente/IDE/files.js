@@ -13,30 +13,12 @@ const menuRenombrar =
 const menuEliminar =
     document.getElementById("menuEliminar");
 
-const botonPersonalizar =
-    document.getElementById("botonPersonalizar");
-
-const ventanaPersonalizar =
-    document.getElementById("ventanaPersonalizar");
-
-const cerrarPersonalizar =
-    document.getElementById("cerrarPersonalizar");
-
-const temaClaro =
-    document.getElementById("temaClaro");
-
-const temaOscuro =
-    document.getElementById("temaOscuro");
-
 let elementoContextual = null;
 
 function cerrarMenu() {
     if (!menuArchivos) return;
 
-    menuArchivos.classList.remove(
-        "visible"
-    );
-
+    menuArchivos.classList.remove("visible");
     elementoContextual = null;
 }
 
@@ -80,12 +62,14 @@ document.addEventListener(
                 filaCarpeta.parentElement;
         }
 
-        if (!elemento) return;
+        if (!elemento) {
+            cerrarMenu();
+            return;
+        }
 
         evento.preventDefault();
 
-        elementoContextual =
-            elemento;
+        elementoContextual = elemento;
 
         const esArchivo =
             elemento.classList.contains(
@@ -104,18 +88,47 @@ document.addEventListener(
             elemento.handle;
 
         elementoContextual.carpetaPadre =
-            elemento.carpetaPadre ||
-            null;
+            elemento.carpetaPadre || null;
+
+        menuArchivos.classList.add("visible");
+
+        const ancho =
+            menuArchivos.offsetWidth;
+
+        const alto =
+            menuArchivos.offsetHeight;
+
+        let izquierda =
+            evento.clientX;
+
+        let arriba =
+            evento.clientY;
+
+        if (
+            izquierda + ancho >
+            window.innerWidth
+        ) {
+            izquierda =
+                window.innerWidth -
+                ancho -
+                8;
+        }
+
+        if (
+            arriba + alto >
+            window.innerHeight
+        ) {
+            arriba =
+                window.innerHeight -
+                alto -
+                8;
+        }
 
         menuArchivos.style.left =
-            `${evento.clientX}px`;
+            `${Math.max(8, izquierda)}px`;
 
         menuArchivos.style.top =
-            `${evento.clientY}px`;
-
-        menuArchivos.classList.add(
-            "visible"
-        );
+            `${Math.max(8, arriba)}px`;
     }
 );
 
@@ -130,23 +143,13 @@ document.addEventListener(
         ) {
             cerrarMenu();
         }
+    }
+);
 
-        if (
-            ventanaPersonalizar &&
-            ventanaPersonalizar.classList.contains(
-                "visible"
-            ) &&
-            !ventanaPersonalizar.contains(
-                evento.target
-            ) &&
-            !botonPersonalizar?.contains(
-                evento.target
-            )
-        ) {
-            ventanaPersonalizar.classList.remove(
-                "visible"
-            );
-        }
+window.addEventListener(
+    "resize",
+    () => {
+        cerrarMenu();
     }
 );
 
@@ -498,49 +501,3 @@ async function copiarCarpeta(
         }
     }
 }
-
-botonPersonalizar?.addEventListener(
-    "click",
-    evento => {
-        evento.stopPropagation();
-
-        ventanaPersonalizar?.classList.toggle(
-            "visible"
-        );
-    }
-);
-
-cerrarPersonalizar?.addEventListener(
-    "click",
-    () => {
-        ventanaPersonalizar?.classList.remove(
-            "visible"
-        );
-    }
-);
-
-temaClaro?.addEventListener(
-    "click",
-    () => {
-        Estado.guardarTema(
-            "claro"
-        );
-
-        document.body.classList.remove(
-            "tema-oscuro"
-        );
-    }
-);
-
-temaOscuro?.addEventListener(
-    "click",
-    () => {
-        Estado.guardarTema(
-            "oscuro"
-        );
-
-        document.body.classList.add(
-            "tema-oscuro"
-        );
-    }
-);
