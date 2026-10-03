@@ -1,0 +1,27 @@
+POST /compile
+       │
+       ▼
+ servidor.js
+       │
+       ▼
+ gestorProyecto.js
+       │
+       ▼
+ proyecto reconstruido
+       │
+       ▼
+ compilador.js
+       │
+       ▼
+ ¿cómo compilamos?
+
+ Esta es la esctructura pensada:
+
+ motor/
+├── compilador/
+│   └── analizadorProyecto.js
+├── proyecto/
+│   └── gestorProyecto.js
+├── servidor/
+│   └── servidor.js
+└── proyectos_temporales/

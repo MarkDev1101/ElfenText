@@ -796,13 +796,112 @@ $("cerrarProyecto")?.addEventListener(
     }
 );
 
+async function obtenerArchivosProyecto(
+    carpeta,
+    ruta = ""
+) {
+    const archivos = [];
+
+    for await (
+        const [nombre, entrada]
+        of carpeta.entries()
+    ) {
+        const rutaArchivo =
+            ruta
+                ? `${ruta}/${nombre}`
+                : nombre;
+
+        if (entrada.kind === "file") {
+            const archivo =
+                await entrada.getFile();
+
+            const contenido =
+                await archivo.arrayBuffer();
+
+            archivos.push({
+                nombre: rutaArchivo,
+                contenido: contenido
+            });
+
+        } else if (
+            entrada.kind === "directory"
+        ) {
+            const archivosCarpeta =
+                await obtenerArchivosProyecto(
+                    entrada,
+                    rutaArchivo
+                );
+
+            archivos.push(
+                ...archivosCarpeta
+            );
+        }
+    }
+
+    return archivos;
+}
+
+function convertirArrayBufferABase64(buffer) {
+    let binario = "";
+
+    const bytes =
+        new Uint8Array(buffer);
+
+    const tamañoBloque = 8192;
+
+    for (
+        let inicio = 0;
+        inicio < bytes.length;
+        inicio += tamañoBloque
+    ) {
+        const bloque =
+            bytes.subarray(
+                inicio,
+                inicio + tamañoBloque
+            );
+
+        binario += String.fromCharCode(
+            ...bloque
+        );
+    }
+
+    return btoa(binario);
+}
+
 async function compilarProyecto() {
     try {
+        const archivos =
+            await obtenerArchivosProyecto(
+                proyecto
+            );
+
+        const archivosCodificados =
+            archivos.map(archivo => ({
+                nombre: archivo.nombre,
+                contenido:
+                    convertirArrayBufferABase64(
+                        archivo.contenido
+                    )
+            }));
+
+        const proyectoEnviar = {
+            archivos: archivosCodificados
+        };
+
         const respuesta =
             await fetch(
                 "http://localhost:3000/compile",
                 {
-                    method: "POST"
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify(
+                        proyectoEnviar
+                    )
                 }
             );
 
@@ -816,7 +915,7 @@ async function compilarProyecto() {
 
     } catch (error) {
         console.error(
-            "Error al conectar con el motor:",
+            "Error al enviar proyecto:",
             error
         );
     }
